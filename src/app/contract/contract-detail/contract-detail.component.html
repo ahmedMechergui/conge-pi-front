@@ -1,0 +1,49 @@
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel1">Contract detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xl-12">
+            <label class="form-label">Employee ID<span class="text-danger">*</span></label>
+            <input type="email" class="form-control" [defaultValue]="contract?.emplyeeId" >
+            <div class="row">
+              <div class="col-xl-6">
+                <label class="form-label mt-3">Contract Name<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input type="text" class="form-control" [defaultValue]="contract?.contractName">
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <label class="form-label mt-3">Type<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input type="text" class="form-control" [defaultValue]="contract?.type">
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <label class="form-label mt-3">Status<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input type="text" class="form-control" [defaultValue]="contract?.status">
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <label class="form-label mt-3">Period<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input type="text" class="form-control" [defaultValue]="contract?.period">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
