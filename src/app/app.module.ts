@@ -12,6 +12,10 @@ import {AppRoutingModule} from "./app-routing.module";
 import {ContainerComponent} from './container/container.component';
 import {ContractDetailComponent} from './contract/contract-detail/contract-detail.component';
 import {HttpClientModule} from "@angular/common/http";
+import { CongeReplacementComponent } from './conge-replacement/conge-replacement.component';
+import {FormsModule} from "@angular/forms";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -23,12 +27,20 @@ import {HttpClientModule} from "@angular/common/http";
     HomeComponent,
     ContainerComponent,
     ContractDetailComponent,
+    CongeReplacementComponent,
   ],
   imports: [
     BrowserModule,
     RouterOutlet,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000, // 5 seconds
+      closeButton: true,
+      progressBar: true
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
