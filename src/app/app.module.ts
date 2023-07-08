@@ -15,7 +15,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule, Location} from "@angular/common";
 import { CongeReplacementComponent } from './conge-replacement/conge-replacement.component';
-import {FormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -44,7 +43,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     }),
     FormsModule,
     HttpClientModule,
-    FormsModule,
     ReactiveFormsModule,
     CommonModule,
   ],
