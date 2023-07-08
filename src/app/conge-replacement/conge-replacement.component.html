@@ -53,7 +53,7 @@
                   <td><span>{{request.id}}</span></td>
                   <td>
                     <div class="products">
-                      <img src="assets/images/contacts/pic2.jpg" class="avatar avatar-md" alt="">
+                      <img src="{{request.employeeImg}}" class="avatar avatar-md" alt="">
                       <div>
                         <h6>{{request.replacedEmployee.firstName}} {{request.replacedEmployee.lastName}}</h6>
                         <span>{{request.replacedEmployee.email}}</span>
@@ -62,7 +62,7 @@
                   </td>
                   <td>
                     <div class="products">
-                      <img src="assets/images/contacts/pic2.jpg" class="avatar avatar-md" alt="">
+                      <img src="{{request.replacementImg}}" class="avatar avatar-md" alt="">
                       <div>
                         <h6>{{request.replacement.replacedBy.firstName}} {{request.replacement.replacedBy.lastName}}</h6>
                         <span>{{request.replacement.replacedBy.email}}</span>

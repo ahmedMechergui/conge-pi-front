@@ -16,38 +16,6 @@ export class ContractComponent implements OnInit {
   @ViewChild('signPadCanvas', {static: false}) signaturePadElement: any;
   signImage: any;
   Contracts: Contract[] = [
-    {
-      emplyeeId: "1",
-      contractName: "cdi",
-      employee: "mourad",
-      period: "2 ans",
-      status: ContractStatus.ACTIVE,
-      type: ContractType.CDI
-    },
-    {
-      emplyeeId: "2",
-      contractName: "cdi",
-      employee: "mourad",
-      period: "2 ans",
-      status: ContractStatus.ON_HOLD,
-      type: ContractType.CDI
-    },
-    {
-      emplyeeId: "3",
-      contractName: "cdi",
-      employee: "mourad",
-      period: "2 ans",
-      status: ContractStatus.ENDED,
-      type: ContractType.CDI
-    },
-    {
-      emplyeeId: "4",
-      contractName: "cdi",
-      employee: "mourad",
-      period: "2 ans",
-      status: ContractStatus.WAITING_SIGNATURE,
-      type: ContractType.CDI
-    },
   ]
 
   constructor(private contractService: ContractService) {
