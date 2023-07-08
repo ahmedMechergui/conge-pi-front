@@ -31,7 +31,7 @@ export class CongeService {
   ]
 
   getConge() {
-    return this.http.get('http://localhost:8090/api/conge')
+    return this.data
   }
 
   editConge(data : any){
@@ -44,9 +44,5 @@ export class CongeService {
 
   deleteConge(id : any){
     return this.http.delete('http://localhost:8090/api/conge'+id)
-  }
-
-  acceptConge(data : any){
-    return this.http.put('http://localhost:8090/api/conge/'+data.id , data)
   }
 }

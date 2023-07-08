@@ -52,9 +52,9 @@
                     <div style="font-size: 16px; color: brown;" (click)="showDelete(i)">
                         <i class="bi bi-trash"></i> 
                     </div>
-                    <a style="font-size: 16px; margin-left: 10px;   color :dodgerblue;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="showConge(i)">
+                    <div style="font-size: 16px; margin-left: 10px;  color :dodgerblue;" (click)="showConge(i)">
                         <i class="bi bi-pencil"></i> 
-                    </a>
+                    </div>
                     <div style="font-size: 16px; margin-left: 10px;  color :green; font-weight: bold;" (click)="showCheck(i)">
                         <i class="bi bi-check"></i> 
                     </div>
@@ -117,7 +117,9 @@
     </div>
   </div>
 
-
+  <button class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Edit un conge
+</button>
   <div class="modal fade bd-example-modal-lg" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -149,7 +151,7 @@
                     <select class="form-control" [(ngModel)]="conge.typeConge" name="typeConge">
                        
                         <option value="ANNUEL">ANNUEL</option>
-                        <option value="MALADIE">MALADIE</option>
+                        <option value="ANNUEL">MALADIE</option>
                         <option value="MATERNITE">MATERNITE</option>
                         <option value="SANS_SOLDE">SANS_SOLDE</option>
                       </select>
@@ -159,7 +161,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-primary" (click)="editConge()">Enregistrer</button>
+          <button type="button" class="btn btn-primary" (click)="postConge()">Enregistrer</button>
         </div>
       </div>
     </div>

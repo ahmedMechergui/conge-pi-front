@@ -29,46 +29,25 @@ export class CongeComponent implements OnInit {
   }
 
   getAllConge() {
-   this.congeService.getConge().subscribe(res=>{
-    console.log('aaaaaaaaaaaa' , res)
-    this.conges = res
-   })
+    this.conges = this.congeService.getConge()
+    console.log(this.conges)
+  }
+
+  postConge(){
+    console.log(this.conge)
+  }
+
+  showConge(i:any){
+    this.conge = i
+    console.log("conge" , this.conge)
     
   }
 
-  postConge() {
+  editConge(){
     console.log(this.conge)
-    this.congeService.postConge(this.conge).subscribe(res => {
-      Swal.fire(
-        'Bien  !',
-        'Vous avez ajouté un congé !',
-        'success'
-      ).then(a => {
-        this.getAllConge()
-      })
-    })
   }
 
-  showConge(i: any) {
-    this.conge = i
-    console.log("conge", this.conge)
-
-  }
-
-  editConge() {
-    console.log(this.conge)
-    this.congeService.editConge(this.conge).subscribe(res => {
-      Swal.fire(
-        'Bien  !',
-        'Vous avez modifé un congé !',
-        'success'
-      ).then(a => {
-        this.getAllConge()
-      })
-    })
-  }
-
-  showDelete(i: any) {
+  showDelete(i:any){
     Swal.fire({
       title: 'Êtes-vous sûr(e) ?',
       text: "Vous ne pourrez pas revenir en arrière !",
@@ -79,22 +58,17 @@ export class CongeComponent implements OnInit {
       confirmButtonText: 'Oui, supprimez-le !'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.congeService.deleteConge(i.id).subscribe(res=>{
-
-          Swal.fire(
-            'Supprimé !',
-            'Votre fichier a été supprimé.',
-            'success'
-          ).then(a => {
-            this.getAllConge()
-          })
-        })
+        Swal.fire(
+          'Supprimé !',
+          'Votre fichier a été supprimé.',
+          'success'
+        )
       }
     });
-
+    
   }
 
-  showCheck(i: any) {
+  showCheck(i : any){
     Swal.fire({
       title: 'Êtes-vous sûr(e) ?',
       text: "Vous ne pourrez pas revenir en arrière !",
@@ -105,17 +79,11 @@ export class CongeComponent implements OnInit {
       confirmButtonText: 'Oui, accepte-le !'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        i.decision = true
-        this.congeService.acceptConge(i).subscribe(res=>{
-
-          Swal.fire(
-            'Supprimé !',
-            'Votre fichier a été modifié.',
-            'success'
-          ).then(a => {
-            this.getAllConge()
-          })
-        })
+        Swal.fire(
+          'Supprimé !',
+          'Votre fichier a été supprimé.',
+          'success'
+        )
       }
     });
   }
