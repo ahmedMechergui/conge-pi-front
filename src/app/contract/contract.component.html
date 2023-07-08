@@ -40,38 +40,48 @@
                 <tr>
                   <th>Employee ID</th>
                   <th>Employee Name</th>
+                  <th>Written by</th>
                   <th>Contract name</th>
                   <th>Type</th>
-                  <th>Period</th>
-                  <th>Status</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th style="text-align: center">Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let contract of Contracts" (click)="selectContract(contract)" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal1">
-                  <td><span>{{contract.emplyeeId}}</span></td>
+                <tr *ngFor="let contract of contractsData" (click)="selectContract(contract)" >
+                  <td><span>{{contract.employee.id}}</span></td>
                   <td>
-                    <div class="products">
-                      <img src="images/contacts/pic2.jpg" class="avatar avatar-md" alt="">
+                    <div class="products" data-bs-toggle="modal"
+                         data-bs-target="#exampleModal1">
+                      <img src="assets/images/employee/alex-suprun-ZHvM3XIOHoE-unsplash.jpg" class="avatar avatar-md"
+                           alt="">
                       <div>
-                        <h6>{{contract.employee}}</h6>
-                        <span>Web Designer</span>
+                        <h6>{{contract.employee.firstName}}</h6>
+                        <span>{{contract.employee.email}}</span>
                       </div>
                     </div>
                   </td>
+                  <td><span>{{contract.employee.firstName}}</span></td>
                   <td><span>{{contract.contractName}}</span></td>
                   <td><span class="text-primary">{{contract.type}}</span></td>
                   <td>
-                    <span>{{contract.period}}</span>
+                    <span>{{contract.period.startDate | date}}</span>
+                  </td>
+                  <td>
+                    <span>{{contract.period.endDate | date}}</span>
                   </td>
                   <td>
                     <span [ngClass]="{
                     'badge badge-success light border-0': contract.status === ContractStatus.ACTIVE,
-                    'badge badge-dark light border-0':contract.status ===ContractStatus.ON_HOLD,
+                    'badge badge-primary light border-0':contract.status ===ContractStatus.ON_HOLD,
                     'badge badge-danger light border-0':contract.status ===ContractStatus.ENDED,
                     'badge badge-info light border-0':contract.status ===ContractStatus.WAITING_SIGNATURE
-                    }">{{contract.status}}</span>
+                    }" style="display: inline-block;min-width: 150px;text-align: center">{{contract.status}}</span>
+
+                    &nbsp;<button (click)="onDelete(contract.id)" class="btn btn-danger shadow btn-xs sharp" title="Supprimer" ><i class="fa fa-trash"></i></button>
                   </td>
+
                 </tr>
                 </tbody>
 
@@ -108,53 +118,60 @@
                     stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <div class="fallback">
-              <input name="file" type="file" multiple>
+              <input name="file" type="file" (change)="onFileSelected($event)" multiple>
 
             </div>
           </form>
         </div>
       </div>
-      <form>
+      <form [formGroup]="contractForm" (ngSubmit)="onSubmit()">
         <div class="row">
-          <div class="col-xl-6 mb-3">
+          <div class="col-xl-6 mb-3" formGroupName="employee">
             <label for="exampleFormControlInput1" class="form-label">Employee ID <span
               class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="id">
           </div>
           <div class="col-xl-6 mb-3">
-            <label for="exampleFormControlInput2" class="form-label">Employee Name<span
+            <label for="exampleFormControlInput2" class="form-label">Contract Name<span
               class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="">
+            <input type="text" class="form-control" id="exampleFormControlInput2" formControlName="contractName">
           </div>
+          <div formGroupName="period">
+            <div class="col-xl-6 mb-3">
+              <label for="exampleFormControlInput99" class="form-label">Joining Date<span
+                class="text-danger">*</span></label>
+              <input type="date" class="form-control" id="exampleFormControlInput99" formControlName="startDate">
+            </div>
+            <div class="col-xl-6 mb-3">
+              <label for="exampleFormControlInput99" class="form-label">Ending Date<span
+                class="text-danger">*</span></label>
+              <input type="date" class="form-control" id="exampleFormControlInput100" formControlName="endDate">
+            </div>
+          </div>
+
           <div class="col-xl-6 mb-3">
             <label class="form-label">Contract Type<span class="text-danger">*</span></label>
-            <select class="default-select form-control">
+            <select class="default-select form-control" formControlName="type">
               <option data-display="Select">Please select</option>
-              <option value="html">CDD</option>
-              <option value="css">CDI</option>
-              <option value="javascript">CVIP</option>
+              <option value="CDD">CDD</option>
+              <option value="CDI">CDI</option>
+              <option value="CIVP">CIVP</option>
               <option value="FREELANCE">FREELANCE</option>
             </select>
           </div>
           <div class="col-xl-6 mb-3">
-            <label for="exampleFormControlInput99" class="form-label">Joining Date<span
-              class="text-danger">*</span></label>
-            <input type="date" class="form-control" id="exampleFormControlInput99">
-          </div>
-
-          <div class="col-xl-6 mb-3">
-            <label class="form-label">Contract Status<span class="text-danger">*</span></label>
-            <select class="default-select form-control">
+            <label class="form-label">Status<span class="text-danger">*</span></label>
+            <select class="default-select form-control" formControlName="status">
               <option data-display="Select">Please select</option>
-              <option value="html">waiting signature</option>
-              <option value="css">on hold</option>
-              <option value="javascript">active</option>
-              <option value="ended">ended</option>
+              <option value="WAITING_SIGNATURE">WAITING_SIGNATURE</option>
+              <option value="ON_HOLD">ON_HOLD</option>
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="ENDED">ENDED</option>
             </select>
           </div>
-          <div class="col-xl-6 mb-3">
+          <div class="col-xl-12 mb-3">
             <label class="form-label">Notes<span class="text-danger">*</span></label>
-            <textarea rows="2" class="form-control"></textarea>
+            <textarea rows="2" class="form-control" formControlName="notes"></textarea>
           </div>
           <div class="col-xl-12 mb-3">
             <div style="text-align: center;margin-top:30px;">
@@ -176,7 +193,7 @@
           </div>
         </div>
         <div>
-          <button class="btn btn-primary me-1" (click)="saveContract($event)">Save</button>
+          <button class="btn btn-primary me-1" type="submit" (click)="saveContract($event)">Save</button>
           <!--          <button class="btn btn-danger light ms-1">Cancel</button>-->
           <button id="cancelButton" class="btn btn-danger light ms-1" (click)="cancel($event)">Cancel</button>
 

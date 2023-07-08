@@ -12,6 +12,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {ContainerComponent} from './container/container.component';
 import {ContractDetailComponent} from './contract/contract-detail/contract-detail.component';
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CommonModule, Location} from "@angular/common";
 import { CongeReplacementComponent } from './conge-replacement/conge-replacement.component';
 import {FormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
@@ -40,9 +42,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
       closeButton: true,
       progressBar: true
     }),
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
   ],
-  providers: [],
+  providers: [Location],
   bootstrap: [AppComponent]
 })
 export class AppModule {
