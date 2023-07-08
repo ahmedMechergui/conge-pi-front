@@ -1,0 +1,166 @@
+<div class="card" style="margin-top: 50px; margin-left: 220px; padding: 30px;">
+    <div style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Ajouter un conge
+                </button>
+            </div>
+            <div class="col-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Recherche">
+                    <div class="input-group-append">
+                      <button class="btn ">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="col-3">
+                <select class="form-control"  name="typeConge">
+                    <option value="ANNUEL">All type</option>  
+                    <option value="ANNUEL">ANNUEL</option>
+                    <option value="ANNUEL">MALADIE</option>
+                    <option value="MATERNITE">MATERNITE</option>
+                    <option value="SANS_SOLDE">SANS_SOLDE</option>
+                  </select>
+            </div>
+        </div>
+    </div>
+    <table class="table" style="width: 95%; margin-top: 20px;">
+        <thead class="table-dark">
+            <tr>
+                <th>Employee</th>
+                <th>Date début</th>
+                <th>Date fin</th>
+                <th>Nombre de jours</th>
+                <th>typeConge</th>
+                <th>Décision</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of conges">
+                <td>{{i.employe}}</td>
+                <td>{{i.dateDebut}}</td>
+                <td>{{i.dateFin}}</td>
+                <td>{{i.nbrjours}}</td>
+                <td>{{i.typeConge}}</td>
+                <td>{{i.decision}}</td>
+                <td style="display: flex;">
+                    <div style="font-size: 16px; color: brown;" (click)="showDelete(i)">
+                        <i class="bi bi-trash"></i> 
+                    </div>
+                    <a style="font-size: 16px; margin-left: 10px;   color :dodgerblue;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="showConge(i)">
+                        <i class="bi bi-pencil"></i> 
+                    </a>
+                    <div style="font-size: 16px; margin-left: 10px;  color :green; font-weight: bold;" (click)="showCheck(i)">
+                        <i class="bi bi-check"></i> 
+                    </div>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+  
+
+
+
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter un conger</h5>
+         
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="exampleInputEmail1">Nom d'employee</label>
+                    <input type="text" name="employe" [(ngModel)]="conge.employe" class="form-control" placeholder="Nom">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Date de début</label>
+                    <input type="date" class="form-control" [(ngModel)]="conge.dateDebut" name="dateDebut" placeholder="Date de début">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Date de fin</label>
+                    <input type="date" class="form-control" [(ngModel)]="conge.dateFin" name="dateFin" placeholder="Date de fin">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Nombre de jours</label>
+                    <input type="number" class="form-control" [(ngModel)]="conge.nbrjours" name="nbrjours" placeholder="Nombre de jours">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Type conge</label> <br>
+                    <select class="form-control" [(ngModel)]="conge.typeConge" name="typeConge">
+                       
+                        <option value="ANNUEL">ANNUEL</option>
+                        <option value="ANNUEL">MALADIE</option>
+                        <option value="MATERNITE">MATERNITE</option>
+                        <option value="SANS_SOLDE">SANS_SOLDE</option>
+                      </select>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" (click)="postConge()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade bd-example-modal-lg" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit un conger</h5>
+         
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="exampleInputEmail1">Nom d'employee</label>
+                    <input type="text" name="employe" [(ngModel)]="conge.employe" class="form-control" placeholder="Nom">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Date de début</label>
+                    <input type="date" class="form-control" [(ngModel)]="conge.dateDebut" name="dateDebut" placeholder="Date de début">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Date de fin</label>
+                    <input type="date" class="form-control" [(ngModel)]="conge.dateFin" name="dateFin" placeholder="Date de fin">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Nombre de jours</label>
+                    <input type="number" class="form-control" [(ngModel)]="conge.nbrjours" name="nbrjours" placeholder="Nombre de jours">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputEmail1">Type conge</label> <br>
+                    <select class="form-control" [(ngModel)]="conge.typeConge" name="typeConge">
+                       
+                        <option value="ANNUEL">ANNUEL</option>
+                        <option value="MALADIE">MALADIE</option>
+                        <option value="MATERNITE">MATERNITE</option>
+                        <option value="SANS_SOLDE">SANS_SOLDE</option>
+                      </select>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" (click)="editConge()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
