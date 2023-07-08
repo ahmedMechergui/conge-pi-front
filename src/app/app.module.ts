@@ -14,6 +14,10 @@ import {ContractDetailComponent} from './contract/contract-detail/contract-detai
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule, Location} from "@angular/common";
+import { CongeReplacementComponent } from './conge-replacement/conge-replacement.component';
+import {FormsModule} from "@angular/forms";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -25,11 +29,20 @@ import {CommonModule, Location} from "@angular/common";
     HomeComponent,
     ContainerComponent,
     ContractDetailComponent,
+    CongeReplacementComponent,
   ],
   imports: [
     BrowserModule,
     RouterOutlet,
     AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000, // 5 seconds
+      closeButton: true,
+      progressBar: true
+    }),
+    FormsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

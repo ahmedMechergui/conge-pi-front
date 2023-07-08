@@ -1,0 +1,197 @@
+<div class="content-body">
+
+  <div class="page-titles">
+    <ol class="breadcrumb">
+      <li><h5 class="bc-title">Demandes remplacements congés</h5></li>
+      <li class="breadcrumb-item"><a href="javascript:void(0)">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M2.125 6.375L8.5 1.41667L14.875 6.375V14.1667C14.875 14.5424 14.7257 14.9027 14.4601 15.1684C14.1944 15.4341 13.8341 15.5833 13.4583 15.5833H3.54167C3.16594 15.5833 2.80561 15.4341 2.53993 15.1684C2.27426 14.9027 2.125 14.5424 2.125 14.1667V6.375Z"
+            stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6.375 15.5833V8.5H10.625V15.5833" stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Conge </a>
+      </li>
+      <li class="breadcrumb-item active">Demandes remplacements</li>
+    </ol>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="table-responsive active-projects style-1">
+              <div class="tbl-caption">
+                <h4 class="heading mb-0">Demandes remplacements congés</h4>
+                <div>
+                  <a type="button" class="btn btn-primary btn-sm" data-bs-toggle="offcanvas"
+                     href="#offCanvasAddReplacement"
+                     role="button"
+                     aria-controls="offCanvasAddContract">
+                    <span (click)="clearForm()">+ Ajouter Demande</span>
+                  </a>
+                </div>
+              </div>
+              <table id="empoloyees-tblwrapper" class="table">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Employé en conge</th>
+                  <th>Employé remplaçant</th>
+                  <th>Date debut</th>
+                  <th>Date fin</th>
+                  <th>Poste</th>
+                  <th colspan="2">Compétences</th>
+                  <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let request of replacementRequests" data-bs-toggle="offcanvas"
+                    href="#offCanvasAddReplacement"
+                    role="button"
+                    aria-controls="offCanvasAddContract" (click)="onUpdate(request)">
+                  <td><span>{{request.id}}</span></td>
+                  <td>
+                    <div class="products">
+                      <img src="assets/images/contacts/pic2.jpg" class="avatar avatar-md" alt="">
+                      <div>
+                        <h6>{{request.replacedEmployee.firstName}} {{request.replacedEmployee.lastName}}</h6>
+                        <span>{{request.replacedEmployee.email}}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="products">
+                      <img src="assets/images/contacts/pic2.jpg" class="avatar avatar-md" alt="">
+                      <div>
+                        <h6>{{request.replacement.replacedBy.firstName}} {{request.replacement.replacedBy.lastName}}</h6>
+                        <span>{{request.replacement.replacedBy.email}}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span>{{request.period.startDate | date : 'dd-MM-yyyy'}}</span></td>
+                  <td><span>{{request.period.endDate | date : 'dd-MM-yyyy'}}</span></td>
+                  <td>
+                    <span class="text-capitalize">{{request.position}}</span>
+                  </td>
+                  <td colspan="2">
+                    <span class="text-capitalize">{{request.skills}}</span>
+                  </td>
+
+                  <td>
+                    <span class="badge badge-success light border-0">{{request.status}}</span>
+                    &nbsp;<button (click)="onDelete(request.id)" class="btn btn-danger shadow btn-xs sharp" title="Supprimer" ><i class="fa fa-trash"></i></button>
+                  </td>
+                </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end customeoff" tabindex="-1" id="offCanvasAddReplacement">
+  <div class="offcanvas-header">
+    <h5 class="modal-title" id="#gridSystemModal">Ajouter Demande de Remplacement</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="container-fluid">
+      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+        <div class="row">
+          <div class="col-xl-6 mb-3">
+            <label for="IdEmployee" class="form-label">ID Employé<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="IdEmployee" placeholder="####" name="idEmployee" [(ngModel)]="formData.idEmployee">
+          </div>
+          <div class="col-xl-6 mb-3">
+            <label for="IdReplacement" class="form-label">ID Remplaçant<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="IdReplacement" placeholder="####" name="idReplacement" [(ngModel)]="formData.idReplacement">
+          </div>
+          <div class="col-xl-6 mb-3">
+            <label for="dateDebut" class="form-label">Date Debut<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="dateDebut" name="dateDebut" [(ngModel)]="formData.dateDebut">
+          </div>
+          <div class="col-xl-6 mb-3">
+            <label for="dateFin" class="form-label">Date Fin<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="formData.dateFin">
+          </div>
+          <div class="col-xl-12 mb-3">
+            <label for="poste" class="form-label">Poste<span class="text-danger">*</span></label>
+            <select id="poste" class="default-select form-control" name="poste" [(ngModel)]="formData.poste">
+              <option value="ingenieur logiciel">Ingénieur logiciel</option>
+              <option value="developpeur web">Développeur web</option>
+              <option value="scientifique donnees">Scientifique des données</option>
+              <option value="administrateur reseaux">Administrateur réseaux</option>
+              <option value="administrateur base de donnees">Administrateur de bases de données</option>
+              <option value="analyste cybersecurite">Analyste en cybersécurité</option>
+              <option value="analyste systemes">Analyste systèmes</option>
+              <option value="chef de projet IT">Chef de projet IT</option>
+              <option value="consultant IT">Consultant IT</option>
+              <option value="concepteur UX">Concepteur UX</option>
+              <option value="ingenieur QA">Ingénieur QA</option>
+              <option value="architecte cloud">Architecte cloud</option>
+              <option value="analyste fonctionnel">Analyste fonctionnel</option>
+              <option value="specialiste support IT">Spécialiste du support IT</option>
+              <option value="analyste donnees">Analyste de données</option>
+              <option value="developpeur full stack">Développeur full stack</option>
+              <option value="developpeur app mobile">Développeur d'applications mobiles</option>
+            </select>
+          </div>
+          <div class="col-xl-12 mb-3">
+            <label class="form-label">Compétences<span class="text-danger">*</span></label>
+            <select class="default-select form-control" name="competences" [(ngModel)]="formData.competences" multiple>
+              <option value="java">Java</option>
+              <option value="python">Python</option>
+              <option value="csharp">C#</option>
+              <option value="javascript">JavaScript</option>
+              <option value="htmlcss">HTML/CSS</option>
+              <option value="php">PHP</option>
+              <option value="ruby">Ruby</option>
+              <option value="swift">Swift</option>
+              <option value="cplusplus">C++</option>
+              <option value="sql">SQL</option>
+              <option value="angular">Angular</option>
+              <option value="react">React</option>
+              <option value="nodejs">Node.js</option>
+              <option value="django">Django</option>
+              <option value="laravel">Laravel</option>
+              <option value="hibernate">Hibernate</option>
+              <option value="spring">Spring Framework</option>
+              <option value="mongodb">MongoDB</option>
+              <option value="mysql">MySQL</option>
+              <option value="postgresql">PostgreSQL</option>
+            </select>
+          </div>
+
+          <div class="col-xl-6 mb-3">
+            <label class="form-label">Type de Contract<span class="text-danger">*</span></label>
+            <select class="default-select form-control" name="contractType" [(ngModel)]="formData.contractType">
+              <option data-display="Select">Please select</option>
+              <option value="CIVP">CIVP</option>
+              <option value="CDI">CDI</option>
+              <option value="Feelance">Feelance</option>
+              <option value="Consultant">Consultant</option>
+            </select>
+          </div>
+
+          <div class="col-xl-12 mb-3">
+            <label class="form-label">Notes</label>
+            <textarea rows="2" class="form-control" name="notes" [(ngModel)]="formData.notes"></textarea>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-primary me-1" type="submit">Sauvegarder</button>
+          <button class="btn btn-danger light ms-1" type="reset">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
