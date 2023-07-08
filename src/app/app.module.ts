@@ -12,6 +12,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {ContainerComponent} from './container/container.component';
 import {ContractDetailComponent} from './contract/contract-detail/contract-detail.component';
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CommonModule, Location} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -28,9 +30,12 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     RouterOutlet,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
   ],
-  providers: [],
+  providers: [Location],
   bootstrap: [AppComponent]
 })
 export class AppModule {

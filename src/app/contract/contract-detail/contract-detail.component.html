@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true" >
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-center">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,30 +9,38 @@
         <div class="row">
           <div class="col-xl-12">
             <label class="form-label">Employee ID<span class="text-danger">*</span></label>
-            <input type="email" class="form-control" [defaultValue]="contract?.emplyeeId" >
+            <input type="number" class="form-control"   disabled>
             <div class="row">
               <div class="col-xl-6">
                 <label class="form-label mt-3">Contract Name<span class="text-danger">*</span></label>
                 <div class="input-group">
-                  <input type="text" class="form-control" [defaultValue]="contract?.contractName">
+                  <input type="text" class="form-control" >
                 </div>
               </div>
               <div class="col-xl-6">
-                <label class="form-label mt-3">Type<span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <input type="text" class="form-control" [defaultValue]="contract?.type">
-                </div>
+                <label class="form-label">Contract Type<span class="text-danger">*</span></label>
+                <select class="default-select form-control" >
+                  <option data-display="Select">Please select</option>
+                  <option value="'CDD'">CDD</option>
+                  <option value="'CDI'">CDI</option>
+                  <option value="'CIVP'">CVIP</option>
+                  <option value="'FREELANCE'">FREELANCE</option>
+                </select>
               </div>
               <div class="col-xl-6">
-                <label class="form-label mt-3">Status<span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <input type="text" class="form-control" [defaultValue]="contract?.status">
-                </div>
+                <label class="form-label">Status<span class="text-danger">*</span></label>
+                <select class="default-select form-control" >
+                  <option data-display="Select">Please select</option>
+                  <option value="'WAITING_SIGNATURE'">WAITING_SIGNATURE</option>
+                  <option value="'ON_HOLD'">ON_HOLD</option>
+                  <option value="'ACTIVE'">ACTIVE</option>
+                  <option value="'ENDED'">ENDED</option>
+                </select>
               </div>
               <div class="col-xl-6">
-                <label class="form-label mt-3">Period<span class="text-danger">*</span></label>
+                <label class="form-label mt-3">Start Date<span class="text-danger">*</span></label>
                 <div class="input-group">
-                  <input type="text" class="form-control" [defaultValue]="contract?.period">
+                  <input type="text" class="form-control" id="exampleFormControlInput99" >
                 </div>
               </div>
             </div>
