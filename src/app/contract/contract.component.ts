@@ -21,6 +21,9 @@ export class ContractComponent implements OnInit {
   signPad: any;
   @ViewChild('signPadCanvas', {static: false}) signaturePadElement: any;
   signImage: any;
+  Contracts: Contract[] = [
+  ]
+
   constructor(private contractService: ContractService, private formBuilder: FormBuilder, private http: HttpClient) {
   }
 
@@ -49,11 +52,18 @@ export class ContractComponent implements OnInit {
       next: res => {
         console.log(res);
         this.contractsData = res;
+        this.contractsData.forEach((contract:Contract)=> {
+          contract.image = 'assets/images/users/'+this.getRandomNumber()+'.jpg'
+        })
         console.log(this.contractsData);
       }, error: err => {
         console.log(err);
       }
     })
+  }
+
+  getRandomNumber(): number {
+    return Math.floor(Math.random() * 6) + 1;
   }
 
   ngAfterViewInit() {

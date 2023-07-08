@@ -23,10 +23,19 @@ export class CongeReplacementComponent implements OnInit {
   getReplacementRequests(){
     this.http.get('http://localhost:8080/api/replacements/requests').subscribe((requests:any) => {
       this.replacementRequests = requests;
+      this.replacementRequests.forEach(request => {
+        request.employeeImg = 'assets/images/users/'+this.getRandomNumber()+'.jpg'
+        request.replacementImg = 'assets/images/users/'+this.getRandomNumber()+'.jpg'
+      })
       console.log(requests)
     },error => {
       console.log(error)
     })
+  }
+
+
+  getRandomNumber(): number {
+    return Math.floor(Math.random() * 6) + 1;
   }
 
   onSubmit(form: NgForm) {

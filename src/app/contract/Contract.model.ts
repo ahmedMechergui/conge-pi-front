@@ -8,4 +8,5 @@ export interface Contract{
   status:ContractStatus;
   type:ContractType;
   period:string;
+  image:string;
 }
